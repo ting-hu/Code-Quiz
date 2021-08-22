@@ -21,20 +21,21 @@ var questions = document.querySelector("#question");
 var pageContent = document.querySelector("#page-content");
 var ulCreate = document.createElement("ul");
 var counter = 0;
+var score = 0;
 
 var countDown = function () {
   var timeLeft = 6;
 
   var timeInterval = setInterval(function () {
     currentTime.textContent = timeLeft;
-    if (timeLeft < 0) {
+    if (timeLeft <= 0) {
       clearInterval(timeInterval);
-      currentTime.textContent = "";
+      allDone();
       currentTime.textContent = 0;
     }
     timeLeft--;
-    displayQuestion(counter);
   }, 1000);
+  displayQuestion(counter);
 };
 
 var displayQuestion = function (counter) {
@@ -69,12 +70,54 @@ var compare = function (event) {
     }
     counter++;
 
-    if (counter === questionsArry.length) {
-      divisor.textContent = "End of quiz";
+    if (counter >= questionsArry.length) {
+      allDone();
+    } else {
+      displayQuestion(counter);
     }
-
-    questions.appendChild(divisor);
   }
+  questions.appendChild(divisor);
+};
+
+var allDone = function () {
+  questions.innerHTML = "";
+  ulCreate.innerHTML = "";
+
+  var headerEl = document.createElement("h1");
+  headerEl.setAttribute("class", "all-done-header");
+  headerEl.textContent = "All Done!";
+  questions.appendChild(headerEl);
+
+  var paragraghEl = document.createElement("p");
+  paragraghEl.setAttribute("class", "all-done-p");
+  paragraghEl.textContent = "Your final score is "; //Add the score at the end
+  questions.appendChild(paragraghEl);
+
+  var labelEl = document.createElement("label");
+  labelEl.setAttribute("class", "all-done-l");
+  labelEl.textContent = "Enter initials: ";
+  questions.appendChild(labelEl);
+
+  var inputEl = document.createElement("input");
+  inputEl.setAttribute("class", "all-done-input");
+  inputEl.setAttribute("type", "text");
+  questions.appendChild(inputEl);
+
+  var submitEl = document.createElement("button");
+  submitEl.setAttribute("class", "all-done-button");
+  submitEl.textContent = "Submit";
+  questions.appendChild(submitEl);
+
+  /*submitEl.addEventListener("click", function () {
+    var initials = inputEl.value;
+
+    if(initials === null){
+
+    }
+    else{
+      var finalScore = 
+    }
+  });*/
 };
 
 timer.addEventListener("click", countDown);

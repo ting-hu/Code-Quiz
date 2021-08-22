@@ -33,6 +33,7 @@
 .start-time:hover {
   background-color: plum;
   border-color: plum;
+  cursor: pointer;
 }
 
 li {
@@ -49,6 +50,7 @@ li {
 
 li:hover {
   background-color: plum;
+  cursor: pointer;
 }
 
 .divisor {
@@ -58,4 +60,17 @@ li:hover {
   margin-bottom: 10px;
   margin-left: 25%;
   color: lightgray;
+}
+
+.all-done-l,
+.all-done-p {
+  font-weight: lighter;
+}
+
+.all-done-button {
+  background-color: purple;
+  margin-left: 10px;
+  padding: 20px auto;
+  color: white;
+  border-radius: 5px;
 }
