@@ -10,7 +10,7 @@ var questionsArry = [
       "1. numbers and strings",
       "2. other arrays",
       "3. booleans",
-      "4. all fo the above",
+      "4. all of the above",
     ],
     answer: "4. all of the above",
   },
@@ -22,19 +22,22 @@ var pageContent = document.querySelector("#page-content");
 var ulCreate = document.createElement("ul");
 var counter = 0;
 var score = 0;
+var timeLeft = 20;
+var timePenalty = 10;
+var timeInterval;
 
 var countDown = function () {
-  var timeLeft = 6;
-
-  var timeInterval = setInterval(function () {
-    currentTime.textContent = timeLeft;
-    if (timeLeft <= 0) {
+  timeInterval = setInterval(function () {
+    if (timeLeft > 0) {
+      currentTime.textContent = timeLeft;
+      timeLeft--;
+    } else if (timeLeft <= 0) {
       clearInterval(timeInterval);
       allDone();
       currentTime.textContent = 0;
     }
-    timeLeft--;
   }, 1000);
+
   displayQuestion(counter);
 };
 
@@ -62,16 +65,20 @@ var compare = function (event) {
   if (element.matches("li")) {
     var divisor = document.createElement("div");
     divisor.setAttribute("class", "divisor");
-    if (element.textContent == questionsArry[counter].answer) {
+    if (element.textContent === questionsArry[counter].answer) {
       divisor.textContent = "Correct";
     } else {
-      //Time penatly
+      timeLeft = timeLeft - 10;
       divisor.textContent = "Wrong";
     }
     counter++;
 
     if (counter >= questionsArry.length) {
       allDone();
+      divisor.removeProperty();
+      if (timeLeft <= 0) {
+        currentTime.textContent = 0;
+      }
     } else {
       displayQuestion(counter);
     }
@@ -80,6 +87,9 @@ var compare = function (event) {
 };
 
 var allDone = function () {
+  clearInterval(timeInterval);
+  currentTime.textContent = timeLeft;
+
   questions.innerHTML = "";
   ulCreate.innerHTML = "";
 
@@ -90,8 +100,11 @@ var allDone = function () {
 
   var paragraghEl = document.createElement("p");
   paragraghEl.setAttribute("class", "all-done-p");
-  paragraghEl.textContent = "Your final score is "; //Add the score at the end
-  questions.appendChild(paragraghEl);
+  if (timeLeft >= 0) {
+    paragraghEl.textContent = "Your final score is " + timeLeft;
+    score = timeLeft;
+    questions.appendChild(paragraghEl);
+  }
 
   var labelEl = document.createElement("label");
   labelEl.setAttribute("class", "all-done-l");
@@ -108,16 +121,27 @@ var allDone = function () {
   submitEl.textContent = "Submit";
   questions.appendChild(submitEl);
 
-  /*submitEl.addEventListener("click", function () {
+  submitEl.addEventListener("click", function () {
     var initials = inputEl.value;
 
-    if(initials === null){
+    if (initials === null) {
+    } else {
+      var finalScore = { initials: initials, score: score };
+      var temp = localStorage.getItem("local");
+      if (temp === null) {
+        temp = [];
+      } else {
+        temp = JSON.parse(temp);
+      }
 
+      temp.push(finalScore);
+
+      var record = JSON.stringify(temp);
+      localStorage.setItem("local", record);
+
+      window.location.replace("./highScore.html");
     }
-    else{
-      var finalScore = 
-    }
-  });*/
+  });
 };
 
 timer.addEventListener("click", countDown);

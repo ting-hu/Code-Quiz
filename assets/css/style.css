@@ -2,8 +2,14 @@
   --primary: purple;
 }
 
-.scores {
+.scores a {
   float: left;
+  text-decoration: none;
+  color: purple;
+}
+
+.scores a:hover {
+  color: plum;
 }
 
 .timer {
@@ -73,4 +79,19 @@ li:hover {
   padding: 20px auto;
   color: white;
   border-radius: 5px;
+}
+
+.back-btn,
+.clear-btn {
+  margin-right: 10px;
+  background-color: purple;
+  color: white;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.back-btn:hover,
+.clear-btn:hover {
+  cursor: pointer;
+  background-color: plum;
 }
