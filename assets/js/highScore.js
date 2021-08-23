@@ -13,6 +13,10 @@ goBackEl.addEventListener("click", function () {
   window.location.replace("./index.html");
 });
 
+/**
+ * This function is used to display the highest three user score from
+ * the local storage.
+ */
 var display = function () {
   scores = JSON.parse(scores);
 

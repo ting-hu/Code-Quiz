@@ -53,6 +53,9 @@ var timeLeft = 75;
 var timePenalty = 10;
 var timeInterval;
 
+/**
+ * This function is used to track and update the timer.
+ */
 var countDown = function () {
   timeInterval = setInterval(function () {
     if (timeLeft > 0) {
@@ -68,6 +71,11 @@ var countDown = function () {
   displayQuestion(counter);
 };
 
+/**
+ * This function is used to display the questions and their choices for the user by
+ * taking the counter for the question index.
+ * @param {} counter
+ */
 var displayQuestion = function (counter) {
   questions.innerHTML = "";
   ulCreate.innerHTML = "";
@@ -86,6 +94,11 @@ var displayQuestion = function (counter) {
   });
 };
 
+/**
+ * This function is used to compare the user selection with the correct answer
+ * from the object by used the event handler to target the user selection.
+ * @param {} event
+ */
 var compare = function (event) {
   var element = event.target;
 
@@ -113,6 +126,11 @@ var compare = function (event) {
   questions.appendChild(divisor);
 };
 
+/**
+ * This function is the final page of the program to promote user input their
+ * initials for the high score record in the local storage room. After the submit
+ * button, the website will direct the user to the Highscore page.
+ */
 var allDone = function () {
   clearInterval(timeInterval);
   if (timeLeft <= 0) {

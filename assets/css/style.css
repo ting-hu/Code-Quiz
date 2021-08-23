@@ -1,15 +1,17 @@
 :root {
   --primary: purple;
+  --secondary: plum;
+  --tertiary: white;
 }
 
 .scores a {
   float: left;
   text-decoration: none;
-  color: purple;
+  color: var(--primary);
 }
 
 .scores a:hover {
-  color: plum;
+  color: var(--secondary);
 }
 
 .timer {
@@ -33,20 +35,20 @@
   border-color: var(--primary);
   border-radius: 5px;
   font-size: 20px;
-  color: white;
+  color: var(--tertiary);
 }
 
 .start-time:hover {
-  background-color: plum;
-  border-color: plum;
+  background-color: var(--secondary);
+  border-color: var(--secondary);
   cursor: pointer;
 }
 
 li {
   font-weight: 400px;
   font-size: 16px;
-  background-color: purple;
-  color: white;
+  background-color: var(--primary);
+  color: var(--tertiary);
   width: 10%;
   margin-top: 10px;
   margin-left: 43%;
@@ -55,7 +57,7 @@ li {
 }
 
 li:hover {
-  background-color: plum;
+  background-color: var(--secondary);
   cursor: pointer;
 }
 
@@ -74,18 +76,18 @@ li:hover {
 }
 
 .all-done-button {
-  background-color: purple;
+  background-color: var(--primary);
   margin-left: 10px;
   padding: 20px auto;
-  color: white;
+  color: var(--tertiary);
   border-radius: 5px;
 }
 
 .back-btn,
 .clear-btn {
   margin-right: 10px;
-  background-color: purple;
-  color: white;
+  background-color: var(--primary);
+  color: var(--tertiary);
   border-radius: 5px;
   font-size: 15px;
 }
@@ -93,5 +95,5 @@ li:hover {
 .back-btn:hover,
 .clear-btn:hover {
   cursor: pointer;
-  background-color: plum;
+  background-color: var(--secondary);
 }
