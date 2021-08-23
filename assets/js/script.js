@@ -5,7 +5,7 @@ var questionsArry = [
     answer: "3. alerts",
   },
   {
-    title: "Array in JavaScript can be used to store ___.",
+    title: "Arrays in JavaScript can be used to store ___.",
     choices: [
       "1. numbers and strings",
       "2. other arrays",
@@ -13,6 +13,33 @@ var questionsArry = [
       "4. all of the above",
     ],
     answer: "4. all of the above",
+  },
+  {
+    title: "The condition in an if/else statement is enclosed within ___.",
+    choices: [
+      "1. quotes",
+      "2. curly brackets",
+      "3. parantheses",
+      "4. square brackets",
+    ],
+    answer: "3. parantheses",
+  },
+  {
+    title:
+      "String values must be enclosed within ___ when being assigned to variables.",
+    choices: ["1. commas", "2. curly brackets", "3. quotes", "4. parentheses"],
+    answer: "3. quotes",
+  },
+  {
+    title:
+      "A very useful tool used during development and debugging for printing content to the debugger is:",
+    choices: [
+      "1. JavaScript",
+      "2. terminal/bash",
+      "3. for loop",
+      "4. console.log()",
+    ],
+    answer: "4. console.log()",
   },
 ];
 var currentTime = document.querySelector("#countdown");
@@ -22,7 +49,7 @@ var pageContent = document.querySelector("#page-content");
 var ulCreate = document.createElement("ul");
 var counter = 0;
 var score = 0;
-var timeLeft = 20;
+var timeLeft = 75;
 var timePenalty = 10;
 var timeInterval;
 
@@ -66,10 +93,10 @@ var compare = function (event) {
     var divisor = document.createElement("div");
     divisor.setAttribute("class", "divisor");
     if (element.textContent === questionsArry[counter].answer) {
-      divisor.textContent = "Correct";
+      divisor.textContent = "Correct!";
     } else {
       timeLeft = timeLeft - 10;
-      divisor.textContent = "Wrong";
+      divisor.textContent = "Wrong!";
     }
     counter++;
 
@@ -88,7 +115,9 @@ var compare = function (event) {
 
 var allDone = function () {
   clearInterval(timeInterval);
-  currentTime.textContent = timeLeft;
+  if (timeLeft <= 0) {
+    currentTime.textContent = 0;
+  }
 
   questions.innerHTML = "";
   ulCreate.innerHTML = "";
@@ -103,6 +132,10 @@ var allDone = function () {
   if (timeLeft >= 0) {
     paragraghEl.textContent = "Your final score is " + timeLeft;
     score = timeLeft;
+    questions.appendChild(paragraghEl);
+  } else {
+    paragraghEl.textContent = "Your final score is 0";
+    score = 0;
     questions.appendChild(paragraghEl);
   }
 

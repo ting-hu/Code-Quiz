@@ -2,6 +2,7 @@ var ulEl = document.querySelector("#highscores");
 var clearEl = document.querySelector("#clear-btn");
 var goBackEl = document.querySelector("#back-btn");
 var scores = localStorage.getItem("local");
+var MAX_LENGTH = 3;
 
 clearEl.addEventListener("click", function () {
   localStorage.clear();
@@ -15,8 +16,18 @@ goBackEl.addEventListener("click", function () {
 var display = function () {
   scores = JSON.parse(scores);
 
+  for (var k = 1; k < scores.length; k++) {
+    for (var i = 0; i < scores.length - k; i++) {
+      if (scores[i].score <= scores[i + 1].score) {
+        var temp = scores[i];
+        scores[i] = scores[i + 1];
+        scores[i + 1] = temp;
+      }
+    }
+  }
+
   if (scores != null) {
-    for (let i = 0; i < scores.length; i++) {
+    for (let i = 0; i < MAX_LENGTH; i++) {
       var liEl = document.createElement("li");
       liEl.setAttribute("style", "background-color:plum");
       liEl.textContent =
